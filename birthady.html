@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Yashvi 🎉</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto:wght@400;700&display=swap');
+
+body {
+    margin:0; padding:0;
+    font-family:'Roboto',sans-serif;
+    overflow-x:hidden;
+    font-size:16px;
+    position: relative;
+    background: linear-gradient(120deg,#ffe6f0,#ffcccc);
+    background-size: 400% 400%;
+    animation: gradientAnim 15s ease infinite;
+}
+
+@keyframes gradientAnim {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+
+section {
+    min-height:100vh;
+    display:flex; justify-content:center; align-items:center;
+    flex-direction:column; padding:20px; text-align:center;
+    transition: all 0.6s ease;
+    position: relative;
+}
+
+h1 {
+    font-family:'Pacifico', cursive;
+    font-size:2.5rem;
+    color:#ff4d94;
+    margin-bottom:10px;
+    text-shadow: 0 0 8px #ff99cc, 0 0 15px #ff66aa;
+}
+
+p {
+    font-size:1rem;
+    max-width:90%;
+    margin-bottom:20px;
+    position: relative;
+}
+
+.sparkle {
+    position: absolute;
+    width:4px;
+    height:4px;
+    background: #fff;
+    border-radius:50%;
+    opacity:0.8;
+    pointer-events:none;
+    animation: sparkleAnim 1s infinite;
+}
+
+@keyframes sparkleAnim {
+    0%{transform:scale(0.5) translate(0,0);opacity:0.8}
+    50%{transform:scale(1.2) translate(5px,-5px);opacity:1}
+    100%{transform:scale(0.5) translate(0,0);opacity:0}
+}
+
+button {
+    background:#ff99cc;
+    border:none;
+    padding:15px 30px;
+    border-radius:25px;
+    color:white;
+    font-size:1.1rem;
+    cursor:pointer;
+    margin:10px;
+    transition:0.3s;
+}
+
+button:hover {
+    background:#ff4d94;
+    transform: scale(1.05);
+}
+
+.heart {
+    width: 40px;
+    height: 40px;
+    background-color: #ff4d94;
+    position: absolute;
+    transform: rotate(-45deg);
+    animation: float 6s linear infinite;
+    filter: drop-shadow(0 0 10px #ff66aa);
+}
+.heart::before, .heart::after {
+    content: "";
+    width: 40px;
+    height: 40px;
+    background-color: #ff4d94;
+    border-radius:50%;
+    position:absolute;
+}
+.heart::before { top:-20px; left:0; }
+.heart::after { left:20px; top:0; }
+
+@keyframes float { 
+    0%{ transform:translateY(0) rotate(-45deg); opacity:1;} 
+    100%{ transform:translateY(-600px) rotate(-45deg); opacity:0;} 
+}
+
+section::before {
+    content:'';
+    position:absolute;
+    top:50%; left:50%;
+    transform:translate(-50%,-50%);
+    width:200%;
+    height:200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0) 70%);
+    pointer-events:none;
+}
+
+#slideshow-container {
+    position:relative;
+    width:90%;
+    max-width:300px;
+    height:300px;
+    overflow:hidden;
+    border-radius:15px;
+    margin:auto;
+}
+.slide {
+    width:100%; height:100%; object-fit:cover;
+    position:absolute; top:0; left:0; opacity:0;
+    transition:opacity 1s;
+}
+
+@media screen and (max-width: 480px) {
+    h1 { font-size:2rem; }
+    p { font-size:0.95rem; }
+    button { padding:14px 25px; font-size:1rem; }
+    #slideshow-container { height:200px; }
+}
+
+.confetti-piece {
+    position: absolute;
+    width: 8px; height: 8px;
+    background-color: #ff4d94;
+    opacity: 0.9;
+    transform: rotate(45deg);
+    pointer-events: none;
+    animation: confettiFall 3s linear forwards;
+}
+
+@keyframes confettiFall {
+    0% { transform: translateY(0) rotate(45deg); opacity:1; }
+    100% { transform: translateY(800px) rotate(405deg); opacity:0; }
+}
+
+.popup-msg {
+    position: absolute;
+    background: #ff99cc;
+    color:white;
+    padding:8px 15px;
+    border-radius:20px;
+    font-size:1rem;
+    pointer-events:none;
+    opacity:0.95;
+    animation: popupFade 2s forwards;
+}
+
+@keyframes popupFade {
+    0% { transform: scale(0.5); opacity:0; }
+    50% { transform: scale(1.1); opacity:0.95; }
+    100% { transform: scale(1); opacity:0; }
+}
+</style>
+</head>
+<body>
+
+<section id="welcome">
+    <h1>Happy Birthday, Yashvi! 🎉</h1>
+    <p id="message">Tap below to start Jarvis!</p>
+    <button id="startJarvis">Start Jarvis</button>
+    <button onclick="nextSection()">Next</button>
+</section>
+
+<section id="about">
+    <h1>About You</h1>
+    <p id="aboutMsg">Jarvis will tell why you are special...</p>
+    <button onclick="speak(specialMessage)">Hear Story</button>
+    <button onclick="nextSection()">Next</button>
+</section>
+
+<section id="gallery">
+    <h1>Our Memories</h1>
+    <p id="galleryMsg">Here are some of our favorite moments ❤️</p>
+    <div id="slideshow-container">
+        <img class="slide active" src="https://i.ibb.co/6JDxwdz9/yashvi-5.jpg" alt="Yashvi 1">
+        <img class="slide" src="https://i.ibb.co/6JPBZsxD/yashvi-1.jpg" alt="Yashvi 2">
+        <img class="slide" src="https://i.ibb.co/N6tfk1zG/yashvi-2.jpg" alt="Yashvi 3">
+        <img class="slide" src="https://i.ibb.co/FbXj119c/yashvi-4.jpg" alt="Yashvi 4">
+    </div>
+    <button onclick="scrollToSection('welcome')">Back to Top</button>
+</section>
+
+<audio id="bgMusic" src="YOUR_SHEH_SONG_URL_HERE.mp3" loop></audio>
+
+<script>
+let currentSection = 0;
+const sections = document.querySelectorAll('section');
+
+function scrollToSection(id){ document.getElementById(id).scrollIntoView({behavior:'smooth'});}
+function nextSection(){ currentSection = (currentSection + 1) % sections.length; sections[currentSection].scrollIntoView({behavior:'smooth'}); }
+function previousSection(){ currentSection = (currentSection - 1 + sections.length) % sections.length; sections[currentSection].scrollIntoView({behavior:'smooth'}); }
+
+function speak(message){
+    const synth = window.speechSynthesis;
+    let voices = synth.getVoices();
+    let indianVoice = voices.find(voice => voice.lang.includes('hi')) || voices[0];
+
+    const utter = new SpeechSynthesisUtterance(message);
+    utter.voice = indianVoice;
+    utter.rate = 1;
+    utter.pitch = 1.1;
+    synth.speak(utter);
+
+    const display = document.getElementById('message');
+    display.innerHTML = '';
+    let i = 0;
+    function typeWriter() {
+        if (i < message.length) {
+            display.innerHTML += message.charAt(i);
+            createSparkle(display);
+            i++;
+            setTimeout(typeWriter, 50);
+        }
+    }
+    typeWriter();
+}
+
+function createSparkle(parent){
+    const sparkle = document.createElement('div');
+    sparkle.classList.add('sparkle');
+    sparkle.style.left = Math.random()*parent.offsetWidth+'px';
+    sparkle.style.top = Math.random()*parent.offsetHeight+'px';
+    parent.appendChild(sparkle);
+    setTimeout(()=>{ sparkle.remove() },1000);
+}
+
+function repeatWish(){ speak('Happy Birthday Yashvi! Wishing you bohot saari khushiyan!'); confettiBurst(); }
+
+setInterval(()=>{
+    const heart=document.createElement('div');
+    heart.classList.add('heart');
+    heart.style.left=Math.random()*window.innerWidth+'px';
+    heart.style.width=25+Math.random()*20+'px';
+    heart.style.height=heart.style.width;
+    document.body.appendChild(heart);
+    setTimeout(()=>{heart.remove()},6000);
+},500);
+
+function confettiBurst(){
+    for(let i=0;i<30;i++){
+        const confetti=document.createElement('div');
+        confetti.classList.add('confetti-piece');
+        confetti.style.left=Math.random()*window.innerWidth+'px';
+        confetti.style.backgroundColor=`hsl(${Math.random()*360},80%,60%)`;
+        document.body.appendChild(confetti);
+        setTimeout(()=>{ confetti.remove() },3000);
+    }
+}
+
+document.body.addEventListener('click', (e)=>{
+    const msg=document.createElement('div');
+    msg.classList.add('popup-msg');
+    const messages = ['❤️ Love you!', '✨ Tum amazing ho!', '💖 Birthday magic!', '🎉 Masti ka time!'];
+    msg.innerText = messages[Math.floor(Math.random()*messages.length)];
+    msg.style.left=(e.clientX-30)+'px';
+    msg.style.top=(e.clientY-30)+'px';
+    document.body.appendChild(msg);
+    setTimeout(()=>{ msg.remove() },2000);
+
+    const heart=document.createElement('div');
+    heart.classList.add('heart');
+    heart.style.left=(e.clientX-20)+'px';
+    heart.style.top=(e.clientY-20)+'px';
+    heart.style.width=20+'px';
+    heart.style.height=20+'px';
+    document.body.appendChild(heart);
+    setTimeout(()=>{ heart.remove() },3000);
+});
+
+// Slideshow
+let slideIndex = 0;
+const slides = document.querySelectorAll('#slideshow-container .slide');
+
+function showSlides() {
+    slides.forEach(slide => slide.style.opacity = '0');
+    slideIndex++;
+    if(slideIndex > slides.length) slideIndex = 1;
+    slides[slideIndex-1].style.opacity = '1';
+    setTimeout(showSlides, 4000);
+}
+window.addEventListener('load', showSlides);
+
+const specialMessage = `Kabhi socha nahi tha ki koi itna important ban sakta hai bina kisi plan ke. Tu meri life mein aayi, aur sab kuch thoda aur better lagne laga. Tere saath baat karna, tera hansna, tera gussa — sab kuch apna sa lagta hai. Mujhe nahi pata future mein kya likha hai, par itna zaroor pata hai ki tu meri life ka wo chapter hai jise main baar-baar padhna chahta hoon. Tu sirf ek “person” nahi hai mere liye, tu meri peace hai, meri smile ka reason, aur meri daily happiness. Main perfect nahi hoon, par tere liye better banna chahta hoon. Tere saath honesty, care aur thoda sa childish love lekar chalna chahta hoon.— tu kabhi apni smile mat khona, kyunki wahi meri favourite cheez hai duniya mein. ❤`;
+
+// Voice Commands in Hinglish
+window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+const recognition = new SpeechRecognition();
+recognition.continuous = true;
+recognition.lang = 'hi-IN';
+recognition.interimResults = false;
+
+recognition.onresult = function(event){
+    const last = event.results.length -1;
+    const command = event.results[last][0].transcript.toLowerCase().trim();
+
+    if(command.includes('next section') || command.includes('next')){ nextSection(); speak('Chal next section dekhte hain'); }
+    else if(command.includes('back') || command.includes('peeche')){ previousSection(); speak('Peeche ja rahe hain'); }
+    else if(command.includes('show gallery') || command.includes('gallery dikhao')){ scrollToSection('gallery'); speak('Ye rahi humari gallery'); }
+    else if(command.includes('repeat wish') || command.includes('wish dobara')){ repeatWish(); }
+    else if(command.includes('happy birthday') || command.includes('birthday')){ speak('Happy Birthday Yashvi! Wishing you bohot saari khushiyan!'); confettiBurst(); }
+    else { speak('Sorry, maine samjha nahi'); }
+}
+
+recognition.onend = function() { recognition.start(); }
+
+const startButton = document.getElementById('startJarvis');
+startButton.addEventListener('click', () => {
+    recognition.start();
+    startButton.style.display = 'none';
+
+    const bgMusic = document.getElementById('bgMusic');
+    bgMusic.volume = 0.1; // soft music
+    bgMusic.play();
+
+    speak("Happy Birthday Yashvi! Wishing you bohot saari khushiyan!");
+    setTimeout(() => { speak(specialMessage); }, 3500);
+});
+
+window.speechSynthesis.onvoiceschanged = () => { window.speechSynthesis.getVoices(); };
+</script>
+</body>
+</html>
